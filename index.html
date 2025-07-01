@@ -551,7 +551,7 @@
                           max="20000"
                           value="5000"
                         />
-                        <span id="incomeValue" class="income-value">20K</span>
+                        <span id="incomeValue" class="income-value">5K</span>
                       </div>
                     </div>
                   </div>
@@ -602,13 +602,14 @@
 
     <script src="js/bootstrap.bundle.min.js"></script>
     <script>
-      // Update income value display
+      // Update income value display - ปรับแก้ส่วนนี้ให้ไม่มีทศนิยมเมื่อเป็น K
       const incomeRange = document.getElementById("incomeRange");
       const incomeValue = document.getElementById("incomeValue");
       incomeRange.addEventListener("input", (event) => {
         const value = parseInt(event.target.value);
         if (value >= 1000) {
-          incomeValue.textContent = (value / 1000) + "K";
+          // ใช้ Math.floor เพื่อปัดค่าลง ทำให้ไม่มีทศนิยมเมื่อแสดงเป็น K
+          incomeValue.textContent = Math.floor(value / 1000) + "K";
         } else {
           incomeValue.textContent = value;
         }
