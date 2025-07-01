@@ -1,174 +1,629 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Thai-Austrian Technical College</title>
-  <link rel="stylesheet" href="css/bootstrap.min.css" />
-  <link rel="shortcut icon" href="img/logo.gif" type="image/x-icon">
-  <style>
-    @font-face {
-      font-family: 'MN Plara';
-      src: url('font/MN Plara.ttf') format('truetype');
-      font-weight: normal;
-      font-style: normal;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thai-Austrian Technical College</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="shortcut icon" href="img/logo.gif" type="image/x-icon" />
+    <style>
+      @font-face {
+        font-family: "MN Plara";
+        src: url("font/MN Plara.ttf") format("truetype");
+        font-weight: normal;
+        font-style: normal;
+      }
 
-    body {
-      font-family: 'MN Plara', sans-serif;
-      font-size: 14px;
-      background-color: #f0f0f0; /* เปลี่ยนสีพื้นหลังเป็นสีเทาอ่อน */
-    }
-  </style>
-</head>
+      body {
+        font-family: "MN Plara", sans-serif;
+        font-size: 14px;
+        background-color: #f0f0f0; /* เปลี่ยนสีพื้นหลังเป็นสีเทาอ่อน */
+      }
+      /* Custom styles for the Create Account form in the image */
+      .create-account-card {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        max-width: 700px; /* Adjusted for the layout in the image */
+        margin: 20px auto;
+      }
+      .create-account-card h2 {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #555;
+      }
+      .form-group {
+        margin-bottom: 20px;
+      }
+      .form-group label {
+        font-weight: bold;
+        color: #333;
+      }
+      .form-control-custom {
+        border-radius: 5px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        width: 100%;
+      }
+      .form-row {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+      .form-row .col {
+        flex: 1;
+      }
+      .gender-options label {
+        margin-right: 15px;
+      }
+      .hobbies-options label {
+        margin-right: 15px;
+      }
+      .income-slider-container {
+        display: flex;
+        align-items: center;
+      }
+      .income-slider-container input[type="range"] {
+        flex-grow: 1;
+        margin-right: 10px;
+      }
+      .income-value {
+        font-weight: bold;
+        color: #28a745;
+      }
+      .upload-file-container {
+        display: flex;
+        align-items: center;
+      }
+      .upload-file-container input[type="file"] {
+        display: none; /* Hide default input */
+      }
+      .custom-file-upload {
+        border: 1px solid #ccc;
+        display: inline-block;
+        padding: 6px 12px;
+        cursor: pointer;
+        background-color: #eee;
+        border-radius: 5px;
+      }
+      .no-file-chosen {
+        margin-left: 10px;
+        color: #888;
+      }
+      .btn-create {
+        background-color: #28a745;
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1.1em;
+        width: 100%;
+        margin-top: 30px;
+      }
+      .btn-create:hover {
+        background-color: #218838;
+      }
+    </style>
+  </head>
 
-<body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg" data-bs-theme="dark" style="background: #336699;">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <img src="img/logo.gif" width="30" class="me-2">Thai-Austrian
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-        aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg"
+      data-bs-theme="dark"
+      style="background: #336699"
+    >
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src="img/logo.gif" width="30" class="me-2" />Thai-Austrian
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <!-- เมนูด้านซ้าย -->
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">สมาชิก</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              ข้อมูลเพิ่มเติม
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">สมัครสมาชิก</a></li>
-              <li><hr class="dropdown-divider" /></li>
-              <li><a class="dropdown-item" href="#">หน้าหลัก</a></li>
-              <li><a class="dropdown-item" href="#">ค้นหาบทความ</a></li>
-              <li><a class="dropdown-item" href="#">อัลบั้มรูปภาพ</a></li>
-              <li><a class="dropdown-item" href="#">เพื่อนสมาชิก</a></li>
-            </ul>
-          </li>
-        </ul>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">สมาชิก</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                ข้อมูลเพิ่มเติม
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a
+                    class="dropdown-item"
+                    href="#"
+                    data-bs-toggle="modal"
+                    data-bs-target="#createAccountModal"
+                    >สมัครสมาชิก</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="#">หน้าหลัก</a></li>
+                <li><a class="dropdown-item" href="#">ค้นหาบทความ</a></li>
+                <li><a class="dropdown-item" href="#">อัลบั้มรูปภาพ</a></li>
+                <li><a class="dropdown-item" href="#">เพื่อนสมาชิก</a></li>
+              </ul>
+            </li>
+          </ul>
 
-        <!-- เมนูด้านขวา -->
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <img src="img/house-door-fill.svg" width="20" alt="home">
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">เข้าสู่ระบบ</a>
-          </li>
-        </ul>
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <img src="img/house-door-fill.svg" width="20" alt="home" />
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                data-bs-toggle="modal"
+                data-bs-target="#loginModal"
+                href="#"
+                >เข้าสู่ระบบ</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div
+      id="carouselExampleSlidesOnly"
+      class="carousel slide"
+      data-bs-ride="carousel"
+    >
+      <div class="carousel-indicators">
+        <button
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide-to="0"
+          class="active"
+          aria-current="true"
+          aria-label="Slide 1"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide-to="1"
+          aria-label="Slide 2"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide-to="2"
+          aria-label="Slide 3"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide-to="3"
+          aria-label="Slide 4"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide-to="4"
+          aria-label="Slide 5"
+        ></button>
+      </div>
+
+      <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="1500">
+          <img src="img/p1.jpg" class="d-block w-100" alt="..." />
+        </div>
+        <div class="carousel-item" data-bs-interval="3000">
+          <img src="img/p2.jpg" class="d-block w-100" alt="..." />
+        </div>
+        <div class="carousel-item" data-bs-interval="3000">
+          <img src="img/p3.jpg" class="d-block w-100" alt="..." />
+        </div>
+        <div class="carousel-item" data-bs-interval="3000">
+          <img src="img/p4.jpg" class="d-block w-100" alt="..." />
+        </div>
+        <div class="carousel-item" data-bs-interval="1500">
+          <img src="img/p5.jpg" class="d-block w-100" alt="..." />
+        </div>
       </div>
     </div>
-  </nav>
 
-  <!-- Slide Show -->
-  <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
-       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
+    <div class="my-5 bg-secondary p-2">
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link active btn btn-light me-3" href="#"
+            >หน่วยงานการศึกษา</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active btn btn-light me-3" href="#"
+            >ฝ่ายบริหารทรัพยากร</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active btn btn-light me-3" href="#"
+            >ฝ่ายแผนงานและความร่วมมือ</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active btn btn-light me-3" href="#">ฝ่ายวิชาการ</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active btn btn-light me-3" href="#"
+            >ฝ่ายพัฒนากิจการนักเรียน นักศึกษา</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active btn btn-light me-3" href="#"
+            >ITA/ข้อมูลสาธารณะ</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active btn btn-light me-3" href="#"
+            >ลิงค์หน่วยงานภายนอก</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active btn btn-light me-3" href="#">สมัครเรียน</a>
+        </li>
+      </ul>
     </div>
-
-
-    <div class="carousel-inner">
-      <div class="carousel-item active" data-bs-interval="1500">
-        <img src="img/p1.jpg" class="d-block w-100" alt="...">
+    <div class="d-grid gap-4" style="grid-template-columns: 1fr 2fr 1fr">
+      <div class="col text-center p-3">
+        <div class="bg-white mb-3">
+          <img
+            src="img/logo.gif"
+            width="200"
+            class="img-thumbnail mt-5"
+          /><br />
+          วิทยาลัยเทคนิคสัตหีบ<br />
+          193 หมู่ 3 ตำบลนาจอมเทียน<br />
+          อำเภอสัตหีบ จังหวัดชลบุรี 20250<br />
+          โทรศัพท์ 038-238398
+        </div>
+        <div class="bg-white mb-3 p-3">
+          <img src="img/m1.png" style="width=75%" />
+        </div>
+        <div class="bg-white mb-3 p-3">
+          <img src="img/m2.png" style="width=75%" />
+        </div>
       </div>
-      <div class="carousel-item"data-bs-interval="3000">
-        <img src="img/p2.jpg" class="d-block w-100" alt="...">
+      <div class="bg-white mb-3">
+        <div class="bg-white mb-3 p-3">
+          <img src="img/mc1.png" style="width=75%" />
+        </div>
+        <div class="bg-white mb-3 p-3 text-center">
+          <img src="img/mc2.png" style="width: 100%" />
+        </div>
       </div>
-      <div class="carousel-item"data-bs-interval="3000">
-        <img src="img/p3.jpg" class="d-block w-100" alt="...">
-      </div>
-         <div class="carousel-item"data-bs-interval="3000">
-        <img src="img/p4.jpg" class="d-block w-100" alt="...">
-      </div>
-         <div class="carousel-item"data-bs-interval="1500">
-        <img src="img/p5.jpg" class="d-block w-100" alt="...">
+      <div class="bg-white mb-3">
+        <div class="bg-white mb-3 p-3">
+          <img src="img/dr1.png" style="width=75%" />
+        </div>
+        <div class="bg-white mb-3 p-3">
+          <img src="img/dr2.png" style="width=75%" />
+        </div>
+        <div class="bg-white mb-3 p-3">
+          <img src="img/dr3.png" style="width=75%" />
+        </div>
       </div>
     </div>
-  </div>
+    <div
+      class="modal fade"
+      id="loginModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-primary text-white">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">เข้าสู่ระบบ</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+              <form action="">
+                <div class="form-floating mb-3">
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="floatingInput"
+                    placeholder="name@example.com"
+                  />
+                  <label for="floatingInput">อีเมล</label>
+                </div>
+                <div class="form-floating">
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="floatingPassword"
+                    placeholder="Password"
+                  />
+                  <label for="floatingPassword">รหัสผ่าน</label>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              ยกเลิก
+            </button>
+            <button type="button" class="btn btn-primary">เข้าสู่ระบบ</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <div
+      class="modal fade"
+      id="createAccountModal"
+      tabindex="-1"
+      aria-labelledby="createAccountModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header" style="background-color: #5cb85c; color: white;">
+            <h1 class="modal-title fs-5" id="createAccountModalLabel">สร้างบัญชี</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="create-account-card" style="box-shadow: none; margin: 0 auto;">
+              <form>
+                <div class="form-row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="firstName">ชื่อจริง *</label>
+                      <input
+                        type="text"
+                        class="form-control-custom"
+                        id="firstName"
+                        placeholder="กรอกชื่อจริงของคุณ"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="lastName">นามสกุล *</label>
+                      <input
+                        type="text"
+                        class="form-control-custom"
+                        id="lastName"
+                        placeholder="กรอกนามสกุลของคุณ"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
 
-<!-- แถบนำทาง -->
- <div class="my-5 bg-secondary p-2">
- <ul class="nav">
-<li class="nav-item">
-    <a class="nav-link active btn btn-light me-3" href="#">หน่วยงานการศึกษา</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link active btn btn-light me-3" href="#">ฝ่ายบริหารทรัพยากร</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link active btn btn-light me-3" href="#">ฝ่ายแผนงานและความร่วมมือ</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link active btn btn-light me-3" href="#">ฝ่ายวิชาการ</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link active btn btn-light me-3" href="#">ฝ่ายพัฒนากิจการนักเรียน นักศึกษา</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link active btn btn-light me-3" href="#">ITA/ข้อมูลสาธารณะ</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link active btn btn-light me-3" href="#">ลิงค์หน่วยงานภายนอก</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link active btn btn-light me-3" href="#">สมัครเรียน</a>
-  </li>
-</ul>
-</div>
-<div class="d-grid gap-4" style="grid-template-columns: 1fr 2fr 1fr;">
-  <div class="col text-center p-3">
-    <div class="bg-white mb-3">
-    <img src="img/logo.gif" width="200" class="img-thumbnail mt-5"><br>
-    วิทยาลัยเทคนิคสัตหีบ<br>
-    193 หมู่ 3 ตำบลนาจอมเทียน<br>
-    อำเภอสัตหีบ จังหวัดชลบุรี 20250<br>
-    โทรศัพท์ 038-238398
-    </div>
-    <div class="bg-white mb-3 p-3">
-      <img src="img/m1.png" style="width=75%">
-    </div>
-     <div class="bg-white mb-3 p-3">
-      <img src="img/m2.png" style="width=75%">
-    </div>
-  </div>
-  <div class="bg-white mb-3">
-    <div class="bg-white mb-3 p-3">
-      <img src="img/mc1.png" style="width=75%">
-    </div>
-    <div class="bg-white mb-3 p-3 text-center">
-  <img src="img/mc2.png" style="width: 100%;">
-</div>
-  </div>
-  <div class="bg-white mb-3">
-    <div class="bg-white mb-3 p-3">
-      <img src="img/dr1.png" style="width=75%">
-    </div>
-    <div class="bg-white mb-3 p-3">
-      <img src="img/dr2.png" style="width=75%">
-    </div>
-    <div class="bg-white mb-3 p-3">
-      <img src="img/dr3.png" style="width=75%">
-    </div>
-  </div>
-</div>
+                <div class="form-group">
+                  <label for="email">อีเมล *</label>
+                  <input
+                    type="email"
+                    class="form-control-custom"
+                    id="email"
+                    placeholder="กรอกอีเมลของคุณ"
+                    required
+                  />
+                </div>
 
-  <script src="js/bootstrap.bundle.min.js"></script>
-</body>
+                <div class="form-row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="password">รหัสผ่าน *</label>
+                      <input
+                        type="password"
+                        class="form-control-custom"
+                        id="password"
+                        placeholder="กรอกรหัสผ่านของคุณ"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="confirmPassword">ยืนยันรหัสผ่าน *</label>
+                      <input
+                        type="password"
+                        class="form-control-custom"
+                        id="confirmPassword"
+                        placeholder="ยืนยันรหัสผ่านของคุณอีกครั้ง"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label>เพศ:</label><br />
+                      <div class="gender-options">
+                        <input
+                          type="radio"
+                          id="male"
+                          name="gender"
+                          value="male"
+                        />
+                        <label for="male">ชาย</label>
+                        <input
+                          type="radio"
+                          id="female"
+                          name="gender"
+                          value="female"
+                        />
+                        <label for="female">หญิง</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <label>งานอดิเรก:</label><br />
+                      <div class="hobbies-options">
+                        <input
+                          type="checkbox"
+                          id="music"
+                          name="hobby"
+                          value="music"
+                        />
+                        <label for="music">ดนตรี</label>
+                        <input
+                          type="checkbox"
+                          id="sports"
+                          name="hobby"
+                          value="sports"
+                        />
+                        <label for="sports">กีฬา</label>
+                        <input
+                          type="checkbox"
+                          id="travel"
+                          name="hobby"
+                          value="travel"
+                        />
+                        <label for="travel">ท่องเที่ยว</label>
+                        <input
+                          type="checkbox"
+                          id="movies"
+                          name="hobby"
+                          value="movies"
+                        />
+                        <label for="movies">ดูหนัง</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="sourceOfIncome">แหล่งรายได้:</label>
+                      <select
+                        class="form-control-custom"
+                        id="sourceOfIncome"
+                      >
+                        <option>ลูกจ้าง</option>
+                        <option>ธุรกิจส่วนตัว</option>
+                        <option>นักเรียน/นักศึกษา</option>
+                        <option>อื่นๆ</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="incomeRange">รายได้:</label>
+                      <div class="income-slider-container">
+                        <input
+                          type="range"
+                          class="form-range"
+                          id="incomeRange"
+                          min="0"
+                          max="20000"
+                          value="5000"
+                        />
+                        <span id="incomeValue" class="income-value">20K</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="profilePicture">อัปโหลดรูปโปรไฟล์:</label>
+                      <div class="upload-file-container">
+                        <label for="profilePictureInput" class="custom-file-upload">
+                          เลือกไฟล์
+                        </label>
+                        <input type="file" id="profilePictureInput" />
+                        <span id="fileName" class="no-file-chosen">ไม่มีไฟล์ที่เลือก</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="age">อายุ:</label>
+                      <input
+                        type="number"
+                        class="form-control-custom"
+                        id="age"
+                        value="18"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="bio">ประวัติส่วนตัว:</label>
+                  <textarea
+                    class="form-control-custom"
+                    id="bio"
+                    rows="4"
+                  ></textarea>
+                </div>
+
+                <button type="submit" class="btn-create">สร้างบัญชี</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Update income value display
+      const incomeRange = document.getElementById("incomeRange");
+      const incomeValue = document.getElementById("incomeValue");
+      incomeRange.addEventListener("input", (event) => {
+        const value = parseInt(event.target.value);
+        if (value >= 1000) {
+          incomeValue.textContent = (value / 1000) + "K";
+        } else {
+          incomeValue.textContent = value;
+        }
+      });
+
+      // Update file name display
+      const profilePictureInput = document.getElementById("profilePictureInput");
+      const fileNameSpan = document.getElementById("fileName");
+      profilePictureInput.addEventListener("change", (event) => {
+        if (event.target.files.length > 0) {
+          fileNameSpan.textContent = event.target.files[0].name;
+        } else {
+          fileNameSpan.textContent = "ไม่มีไฟล์ที่เลือก";
+        }
+      });
+    </script>
+  </body>
 </html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>Login - Thai-Austrian Technical College</title>
+   <link rel="stylesheet" href="css/bootstrap.min.css" />
+   <link rel="shortcut icon" href="img/logo.gif" type="image/x-icon">
+   <style>
+     @font-face {
+       font-family: 'MN Plara';
+       src: url('font/MN Plara.ttf') format('truetype');
+       font-weight: normal;
+       font-style: normal;
+     }
+
+     body {
+       font-family: 'MN Plara', sans-serif;
+       font-size: 14px;
+       background-color: #f0f0f0;
+     }
+
+     .login-container {
+       min-height: 100vh;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+     }
+
+     .login-card {
+       border: none;
+       border-radius: 15px;
+       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+     }
+
+     .login-card .card-header {
+       background-color: #336699;
+       color: white;
+       text-align: center;
+       border-top-left-radius: 15px;
+       border-top-right-radius: 15px;
+     }
+
+     .login-card .card-header img {
+       width: 80px;
+       margin-bottom: 10px;
+     }
+
+     .btn-login {
+       background-color: #336699;
+       color: white;
+       font-weight: bold;
+       padding: 10px;
+       border-radius: 8px;
+       transition: background-color 0.3s;
+     }
+
+     .btn-login:hover {
+       background-color: #285a8c;
+     }
+
+   </style>
+</head>
+
+<body>
+   <div class="container login-container">
+     <div class="col-md-6 col-lg-4">
+       <div class="card login-card">
+         <div class="card-header py-4">
+           <img src="img/logo.gif" alt="Logo">
+           <h4>Thai-Austrian Technical College</h4>
+           <p class="mb-0">กรุณาเข้าสู่ระบบ</p>
+         </div>
+         <div class="card-body p-4">
+           <form>
+             <div class="mb-3">
+               <label for="username" class="form-label">ชื่อผู้ใช้</label>
+               <input type="text" class="form-control" id="username" required>
+             </div>
+             <div class="mb-3">
+               <label for="password" class="form-label">รหัสผ่าน</label>
+               <input type="password" class="form-control" id="password" required>
+             </div>
+             <div class="d-grid">
+               <button type="submit" class="btn btn-login">เข้าสู่ระบบ</button>
+             </div>
+           </form>
+           <div class="text-center mt-3">
+             <a href="index.html">กลับสู่หน้าหลัก</a>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+
+   <script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
